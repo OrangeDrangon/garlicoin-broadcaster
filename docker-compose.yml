@@ -6,6 +6,7 @@ services:
     restart: unless-stopped
     env_file: vars.env
     volumes:
+      # point path before the colon to where the garlicoin data is
       - ./garlicoind:/var/lib/garlicoind
 
   broadcaster:
@@ -13,6 +14,7 @@ services:
     restart: unless-stopped
     env_file: vars.env
     ports:
+      # change the port before the colon the change what port it is bound on the host machine
       - 8000:8000
     depends_on:
       - garlicoind
