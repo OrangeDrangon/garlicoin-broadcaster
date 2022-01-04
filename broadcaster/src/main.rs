@@ -45,5 +45,5 @@ fn broadcast(data: Json<UnbrodcastRawTransaction<'_>>) -> Result<Json<Success>, 
 
 #[launch]
 fn rocket() -> _ {
-    rocket::build().mount("/", routes![index, broadcast])
+    rocket::build().mount("/", routes![broadcast])
 }
