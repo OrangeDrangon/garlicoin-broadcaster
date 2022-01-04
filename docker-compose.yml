@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  garlicoind:
+    image: ghcr.io/orangedrangon/garlicoind:latest
+    restart: unless-stopped
+    env_file: vars.env
+    networks:
+      - broadcaster-network
+    volumes:
+      - ./garlicoind:/var/lib/garlicoind
+
+  broadcaster:
+    build: ./broadcaster
+    restart: unless-stopped
+    env_file: vars.env
+    networks:
+      - broadcaster-network
+    ports:
+      - 8000:8000
+    depends_on:
+      - garlicoind
+
+networks:
+  broadcaster-network:
+    driver: bridge
